@@ -383,33 +383,35 @@ public class Panel extends javax.swing.JFrame {
             Formatter f = new Formatter(filename+".txt");
             f.format(solution.getText()+"By KevinDM 2022...");
             
-            // PREGUNTAR SI QUIERE ABRIR EL ARCHIVO GUARDADO:
-            String[] buttons = {"Si", "Quizas mas tarde"};
-		    int option = JOptionPane.showOptionDialog(null, 
-				"Se ha guardado la solucion correctamente como "+filename+"\nDesea abrir el archivo?", 
-				"Archivo guardado", 
-				JOptionPane.DEFAULT_OPTION, 
-				JOptionPane.QUESTION_MESSAGE, null, 
-				buttons, buttons[0]);
-                if(option == 1) {
-                    // POS NADA XD
-                } 
-                else if(option == 0) {
-                    // ABRIR EL ARCHIVO
-                    try{   
-                        File fil = new File(file.getPath());   
-                        if(!Desktop.isDesktopSupported()){    
-                            System.out.println("not supported");  
-                            //return;  
-                        }  
-                        Desktop desktop = Desktop.getDesktop();  
-                        if(fil.exists()){    
-                            desktop.open(fil);
-                        }        
-                    }catch(Exception e){  
-                        e.printStackTrace();  
-                    }
-                }
+            // PREGUNTAR SI QUIERE ABRIR EL ARCHIVO GUARDADO, PRIMERAMENTE COMPROBANDO SI EL ARCHIVO FUE CREADO:
+            if (filename != null) {
+	            String[] buttons = {"Si", "Quizas mas tarde"};
+			    int option = JOptionPane.showOptionDialog(null, 
+					"Se ha guardado la solucion correctamente como "+filename+"\nDesea abrir el archivo?", 
+					"Archivo guardado", 
+					JOptionPane.DEFAULT_OPTION, 
+					JOptionPane.QUESTION_MESSAGE, null, 
+					buttons, buttons[0]);
+	                if(option == 1) {
+	                    // POS NADA XD
+	                } 
+	                else if(option == 0) {
+	                    // ABRIR EL ARCHIVO
+	                    try{   
+	                        File fil = new File(file.getPath());   
+	                        if(!Desktop.isDesktopSupported()){    
+	                            System.out.println("not supported");  
+	                            //return;  
+	                        }  
+	                        Desktop desktop = Desktop.getDesktop();  
+	                        if(fil.exists()){    
+	                            desktop.open(fil);
+	                        }        
+	                    }catch(Exception e){  
+	                        e.printStackTrace();  
+	                    }
+	                }
+	        }
 
             f.close();
         }catch(Exception e){
